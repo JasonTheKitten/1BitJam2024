@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0llr3edd2g6x"]
+
+[ext_resource type="Texture2D" uid="uid://blm6mqb5ka26j" path="res://assets/player.png" id="1_mbkyt"]
+
+[node name="Player" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_mbkyt")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
