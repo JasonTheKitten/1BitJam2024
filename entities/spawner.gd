@@ -12,3 +12,6 @@ func _ready() -> void:
 func respawn() -> void:
 	_current_player.position = position
 	_current_player.tpfreeze()
+	
+func current_player() -> CharacterBody2D:
+	return _current_player

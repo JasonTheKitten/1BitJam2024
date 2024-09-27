@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnysef7ukcbog"]
+[gd_scene load_steps=16 format=3 uid="uid://dnysef7ukcbog"]
 
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="1_6y2o4"]
 [ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="1_18n86"]
@@ -14,11 +14,14 @@
 [ext_resource type="Texture2D" uid="uid://cv2ahchkvf8m" path="res://assets/press_s.png" id="8_gl1xj"]
 [ext_resource type="Script" path="res://entities/spike_pit.gd" id="11_hpd7a"]
 [ext_resource type="Script" path="res://entities/spawner.gd" id="12_mpw0l"]
+[ext_resource type="Script" path="res://entities/reverso.gd" id="13_ucvtt"]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_reversos")]
+position = Vector2(1, 0)
 script = ExtResource("1_uufqg")
 _spawner = NodePath("Marker2D")
 _spike_pits = [NodePath("SpikeTest/SpikeTestSpikes"), NodePath("HarderTest/HarderTestSpikes"), NodePath("Demo/DemoSpikes")]
+_reversos = [NodePath("ReversoTutorial/Reverso1"), NodePath("ReversoTutorial/Reverso2"), NodePath("ReversoTutorial/Reverso3"), NodePath("ReversoTutorial/Reverso4"), NodePath("ReversoTutorial/Reverso5"), NodePath("SpikeTest/Reversos/Reverso1"), NodePath("SpikeTest/Reversos/Reverso2"), NodePath("SpikeTest/Reversos/Reverso3"), NodePath("SpikeTest/Reversos/Reverso4")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
@@ -180,7 +183,6 @@ position = Vector2(80, -288)
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/Reverso1"]
 texture_repeat = 2
 position = Vector2(536, 440)
-rotation = 3.14159
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
@@ -195,6 +197,7 @@ polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/Reverso2"]
 texture_repeat = 2
 position = Vector2(728, 440)
+rotation = 3.14159
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
@@ -333,7 +336,7 @@ scale = Vector2(1.5, 1)
 polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="HarderTestPlatform7" type="StaticBody2D" parent="HarderTest/Platforms"]
-position = Vector2(1480, 508)
+position = Vector2(1528, 508)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("7_gh2au")
@@ -342,10 +345,11 @@ script = ExtResource("7_gh2au")
 texture_repeat = 2
 texture = ExtResource("4_tdjd3")
 region_enabled = true
-region_rect = Rect2(0, 0, 96, 8)
+region_rect = Rect2(0, 0, 192, 8)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/Platforms/HarderTestPlatform7"]
-scale = Vector2(1.5, 1)
+position = Vector2(0, -1)
+scale = Vector2(3, 1)
 polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="HarderTestSpikes" type="Area2D" parent="HarderTest"]
@@ -383,6 +387,9 @@ polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 [node name="Reversos" type="Node2D" parent="SpikeTest"]
 
 [node name="Reverso1" type="Area2D" parent="SpikeTest/Reversos"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("13_ucvtt")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/Reverso1"]
 texture_repeat = 2
@@ -398,6 +405,10 @@ scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Reverso2" type="Area2D" parent="SpikeTest/Reversos"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("13_ucvtt")
+_speed_multiplier = -1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/Reverso2"]
 texture_repeat = 2
@@ -412,6 +423,9 @@ scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Reverso3" type="Area2D" parent="SpikeTest/Reversos"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("13_ucvtt")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/Reverso3"]
 texture_repeat = 2
@@ -427,6 +441,10 @@ scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Reverso4" type="Area2D" parent="SpikeTest/Reversos"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("13_ucvtt")
+_speed_multiplier = -1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/Reverso4"]
 texture_repeat = 2
@@ -668,6 +686,10 @@ texture = ExtResource("8_gl1xj")
 [node name="ReversoTutorial" type="Node2D" parent="."]
 
 [node name="Reverso1" type="Area2D" parent="ReversoTutorial"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("13_ucvtt")
+_speed_multiplier = -1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso1"]
 texture_repeat = 2
@@ -682,6 +704,9 @@ scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Reverso2" type="Area2D" parent="ReversoTutorial"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("13_ucvtt")
 
 [node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso2"]
 texture_repeat = 2
@@ -698,6 +723,10 @@ scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Reverso3" type="Area2D" parent="ReversoTutorial"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("13_ucvtt")
+_speed_multiplier = -1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso3"]
 texture_repeat = 2
@@ -712,6 +741,9 @@ scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Reverso4" type="Area2D" parent="ReversoTutorial"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("13_ucvtt")
 
 [node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso4"]
 texture_repeat = 2
@@ -728,6 +760,10 @@ scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Reverso5" type="Area2D" parent="ReversoTutorial"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("13_ucvtt")
+_speed_multiplier = -1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso5"]
 texture_repeat = 2
