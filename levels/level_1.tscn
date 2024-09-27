@@ -1,12 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnysef7ukcbog"]
+[gd_scene load_steps=11 format=3 uid="uid://dnysef7ukcbog"]
 
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="1_6y2o4"]
 [ext_resource type="Texture2D" uid="uid://cp7lt5qxt6mid" path="res://assets/ladder.png" id="1_b13ym"]
+[ext_resource type="Texture2D" uid="uid://dlce452qw0qe8" path="res://assets/press_e.png" id="1_iufpy"]
 [ext_resource type="Texture2D" uid="uid://dpo1wnmh36tsj" path="res://assets/deadly_spike_pit.png" id="2_e2n53"]
-[ext_resource type="PackedScene" uid="uid://d0llr3edd2g6x" path="res://entities/Player.tscn" id="2_p8eo7"]
+[ext_resource type="PackedScene" uid="uid://d0llr3edd2g6x" path="res://entities/player/Player.tscn" id="2_p8eo7"]
 [ext_resource type="Texture2D" uid="uid://cn33jtj0noabp" path="res://assets/tower_inner_wall.png" id="3_jv8n0"]
 [ext_resource type="Texture2D" uid="uid://ce3h6sjgq532s" path="res://assets/platform.png" id="4_tdjd3"]
 [ext_resource type="Texture2D" uid="uid://5tiflkt7eoch" path="res://assets/reverso.png" id="5_xjhd8"]
+[ext_resource type="Script" path="res://entities/platform.gd" id="7_gh2au"]
+[ext_resource type="Texture2D" uid="uid://cv2ahchkvf8m" path="res://assets/press_s.png" id="8_gl1xj"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,6 +18,10 @@ limit_left = 0
 limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
+
+[node name="PressE" type="Sprite2D" parent="."]
+position = Vector2(288, 312)
+texture = ExtResource("1_iufpy")
 
 [node name="Ladder" type="StaticBody2D" parent="."]
 position = Vector2(192, 160)
@@ -86,57 +93,61 @@ position = Vector2(80, -288)
 
 [node name="Reversos" type="Node2D" parent="HarderTest"]
 
-[node name="HarderTestReverso1" type="StaticBody2D" parent="HarderTest/Reversos"]
+[node name="Reverso1" type="Area2D" parent="HarderTest/Reversos"]
+
+[node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/Reverso1"]
+texture_repeat = 2
 position = Vector2(536, 440)
-
-[node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/HarderTestReverso1"]
-texture_repeat = 2
 rotation = 3.14159
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/Reversos/HarderTestReverso1"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/Reversos/Reverso1"]
+position = Vector2(536, 440)
 scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
-[node name="HarderTestReverso2" type="StaticBody2D" parent="HarderTest/Reversos"]
-position = Vector2(1112, 440)
+[node name="Reverso2" type="Area2D" parent="HarderTest/Reversos"]
 
-[node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/HarderTestReverso2"]
+[node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/Reverso2"]
 texture_repeat = 2
-rotation = 3.14159
-texture = ExtResource("5_xjhd8")
-region_enabled = true
-region_rect = Rect2(0, 0, 64, 128)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/Reversos/HarderTestReverso2"]
-scale = Vector2(1, 2)
-polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
-
-[node name="HarderTestReverso3" type="StaticBody2D" parent="HarderTest/Reversos"]
-position = Vector2(920, 440)
-
-[node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/HarderTestReverso3"]
-texture_repeat = 2
-texture = ExtResource("5_xjhd8")
-region_enabled = true
-region_rect = Rect2(0, 0, 64, 128)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/Reversos/HarderTestReverso3"]
-scale = Vector2(1, 2)
-polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
-
-[node name="HarderTestReverso4" type="StaticBody2D" parent="HarderTest/Reversos"]
 position = Vector2(728, 440)
-
-[node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/HarderTestReverso4"]
-texture_repeat = 2
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/Reversos/HarderTestReverso4"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/Reversos/Reverso2"]
+position = Vector2(728, 440)
+scale = Vector2(1, 2)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Reverso3" type="Area2D" parent="HarderTest/Reversos"]
+
+[node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/Reverso3"]
+texture_repeat = 2
+position = Vector2(920, 440)
+texture = ExtResource("5_xjhd8")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 128)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/Reversos/Reverso3"]
+position = Vector2(920, 440)
+scale = Vector2(1, 2)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Reverso4" type="Area2D" parent="HarderTest/Reversos"]
+
+[node name="Sprite2D" type="Sprite2D" parent="HarderTest/Reversos/Reverso4"]
+texture_repeat = 2
+position = Vector2(1112, 440)
+rotation = 3.14159
+texture = ExtResource("5_xjhd8")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 128)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/Reversos/Reverso4"]
+position = Vector2(1112, 440)
 scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
@@ -145,6 +156,9 @@ position = Vector2(16, 0)
 
 [node name="HarderTestPlatform1" type="StaticBody2D" parent="HarderTest/Platforms"]
 position = Vector2(328, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/Platforms/HarderTestPlatform1"]
 texture_repeat = 2
@@ -158,6 +172,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="HarderTestPlatform2" type="StaticBody2D" parent="HarderTest/Platforms"]
 position = Vector2(520, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/Platforms/HarderTestPlatform2"]
 texture_repeat = 2
@@ -171,6 +188,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="HarderTestPlatform3" type="StaticBody2D" parent="HarderTest/Platforms"]
 position = Vector2(712, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/Platforms/HarderTestPlatform3"]
 texture_repeat = 2
@@ -184,6 +204,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="HarderTestPlatform4" type="StaticBody2D" parent="HarderTest/Platforms"]
 position = Vector2(904, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/Platforms/HarderTestPlatform4"]
 texture_repeat = 2
@@ -197,6 +220,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="HarderTestPlatform5" type="StaticBody2D" parent="HarderTest/Platforms"]
 position = Vector2(1096, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/Platforms/HarderTestPlatform5"]
 texture_repeat = 2
@@ -210,6 +236,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="HarderTestPlatform6" type="StaticBody2D" parent="HarderTest/Platforms"]
 position = Vector2(1288, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/Platforms/HarderTestPlatform6"]
 texture_repeat = 2
@@ -223,6 +252,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="HarderTestPlatform7" type="StaticBody2D" parent="HarderTest/Platforms"]
 position = Vector2(1480, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/Platforms/HarderTestPlatform7"]
 texture_repeat = 2
@@ -264,57 +296,61 @@ polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Reversos" type="Node2D" parent="SpikeTest"]
 
-[node name="SpikeTestReverso1" type="StaticBody2D" parent="SpikeTest/Reversos"]
+[node name="Reverso1" type="Area2D" parent="SpikeTest/Reversos"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/Reverso1"]
+texture_repeat = 2
 position = Vector2(536, 440)
-
-[node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/SpikeTestReverso1"]
-texture_repeat = 2
 rotation = 3.14159
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeTest/Reversos/SpikeTestReverso1"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeTest/Reversos/Reverso1"]
+position = Vector2(536, 440)
 scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
-[node name="SpikeTestReverso2" type="StaticBody2D" parent="SpikeTest/Reversos"]
-position = Vector2(1112, 440)
+[node name="Reverso2" type="Area2D" parent="SpikeTest/Reversos"]
 
-[node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/SpikeTestReverso2"]
+[node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/Reverso2"]
 texture_repeat = 2
-rotation = 3.14159
-texture = ExtResource("5_xjhd8")
-region_enabled = true
-region_rect = Rect2(0, 0, 64, 128)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeTest/Reversos/SpikeTestReverso2"]
-scale = Vector2(1, 2)
-polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
-
-[node name="SpikeTestReverso3" type="StaticBody2D" parent="SpikeTest/Reversos"]
 position = Vector2(920, 440)
-
-[node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/SpikeTestReverso3"]
-texture_repeat = 2
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeTest/Reversos/SpikeTestReverso3"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeTest/Reversos/Reverso2"]
+position = Vector2(920, 440)
 scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
-[node name="SpikeTestReverso4" type="StaticBody2D" parent="SpikeTest/Reversos"]
-position = Vector2(1304, 440)
+[node name="Reverso3" type="Area2D" parent="SpikeTest/Reversos"]
 
-[node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/SpikeTestReverso4"]
+[node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/Reverso3"]
 texture_repeat = 2
+position = Vector2(1112, 440)
+rotation = 3.14159
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeTest/Reversos/SpikeTestReverso4"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeTest/Reversos/Reverso3"]
+position = Vector2(1112, 440)
+scale = Vector2(1, 2)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Reverso4" type="Area2D" parent="SpikeTest/Reversos"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Reversos/Reverso4"]
+texture_repeat = 2
+position = Vector2(1304, 440)
+texture = ExtResource("5_xjhd8")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 128)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeTest/Reversos/Reverso4"]
+position = Vector2(1304, 440)
 scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
@@ -323,6 +359,9 @@ position = Vector2(16, 0)
 
 [node name="SpikeTestPlatform1" type="StaticBody2D" parent="SpikeTest/Platforms"]
 position = Vector2(328, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Platforms/SpikeTestPlatform1"]
 texture_repeat = 2
@@ -336,6 +375,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="SpikeTestPlatform2" type="StaticBody2D" parent="SpikeTest/Platforms"]
 position = Vector2(520, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Platforms/SpikeTestPlatform2"]
 texture_repeat = 2
@@ -349,6 +391,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="SpikeTestPlatform3" type="StaticBody2D" parent="SpikeTest/Platforms"]
 position = Vector2(712, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Platforms/SpikeTestPlatform3"]
 texture_repeat = 2
@@ -362,6 +407,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="SpikeTestPlatform4" type="StaticBody2D" parent="SpikeTest/Platforms"]
 position = Vector2(904, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Platforms/SpikeTestPlatform4"]
 texture_repeat = 2
@@ -375,6 +423,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="SpikeTestPlatform5" type="StaticBody2D" parent="SpikeTest/Platforms"]
 position = Vector2(1096, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Platforms/SpikeTestPlatform5"]
 texture_repeat = 2
@@ -388,6 +439,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="SpikeTestPlatform6" type="StaticBody2D" parent="SpikeTest/Platforms"]
 position = Vector2(1288, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Platforms/SpikeTestPlatform6"]
 texture_repeat = 2
@@ -401,6 +455,9 @@ polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="SpikeTestPlatform7" type="StaticBody2D" parent="SpikeTest/Platforms"]
 position = Vector2(1480, 508)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/Platforms/SpikeTestPlatform7"]
 texture_repeat = 2
@@ -495,6 +552,9 @@ polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="DemoPlatform1" type="StaticBody2D" parent="Demo"]
 position = Vector2(1456, 924)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
 
 [node name="Sprite2D" type="Sprite2D" parent="Demo/DemoPlatform1"]
 texture_repeat = 2
@@ -506,72 +566,83 @@ region_rect = Rect2(0, 0, 96, 8)
 scale = Vector2(1.5, 1)
 polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
+[node name="Sprite2D" type="Sprite2D" parent="Demo"]
+position = Vector2(1456, 888)
+texture = ExtResource("8_gl1xj")
+
 [node name="ReversoTutorial" type="Node2D" parent="."]
 
-[node name="ReversoTutorial1" type="StaticBody2D" parent="ReversoTutorial"]
+[node name="Reverso1" type="Area2D" parent="ReversoTutorial"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso1"]
+texture_repeat = 2
 position = Vector2(1336, 728)
-
-[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/ReversoTutorial1"]
-texture_repeat = 2
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/ReversoTutorial1"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/Reverso1"]
+position = Vector2(1336, 728)
 scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
-[node name="ReversoTutorial4" type="StaticBody2D" parent="ReversoTutorial"]
-position = Vector2(824, 728)
+[node name="Reverso2" type="Area2D" parent="ReversoTutorial"]
 
-[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/ReversoTutorial4"]
+[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso2"]
 texture_repeat = 2
-texture = ExtResource("5_xjhd8")
-region_enabled = true
-region_rect = Rect2(0, 0, 64, 128)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/ReversoTutorial4"]
-scale = Vector2(1, 2)
-polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
-
-[node name="ReversoTutorial5" type="StaticBody2D" parent="ReversoTutorial"]
-position = Vector2(312, 728)
-
-[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/ReversoTutorial5"]
-texture_repeat = 2
-texture = ExtResource("5_xjhd8")
-region_enabled = true
-region_rect = Rect2(0, 0, 64, 128)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/ReversoTutorial5"]
-scale = Vector2(1, 2)
-polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
-
-[node name="ReversoTutorial2" type="StaticBody2D" parent="ReversoTutorial"]
 position = Vector2(1080, 728)
 rotation = -3.14159
-
-[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/ReversoTutorial2"]
-texture_repeat = 2
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/ReversoTutorial2"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/Reverso2"]
+position = Vector2(1080, 728)
+rotation = -3.14159
 scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
-[node name="ReversoTutorial3" type="StaticBody2D" parent="ReversoTutorial"]
-position = Vector2(568, 728)
-rotation = -3.14159
+[node name="Reverso3" type="Area2D" parent="ReversoTutorial"]
 
-[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/ReversoTutorial3"]
+[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso3"]
 texture_repeat = 2
+position = Vector2(824, 728)
 texture = ExtResource("5_xjhd8")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 128)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/ReversoTutorial3"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/Reverso3"]
+position = Vector2(824, 728)
+scale = Vector2(1, 2)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Reverso4" type="Area2D" parent="ReversoTutorial"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso4"]
+texture_repeat = 2
+position = Vector2(568, 728)
+rotation = -3.14159
+texture = ExtResource("5_xjhd8")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 128)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/Reverso4"]
+position = Vector2(568, 728)
+rotation = -3.14159
+scale = Vector2(1, 2)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Reverso5" type="Area2D" parent="ReversoTutorial"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ReversoTutorial/Reverso5"]
+texture_repeat = 2
+position = Vector2(312, 728)
+texture = ExtResource("5_xjhd8")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 128)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ReversoTutorial/Reverso5"]
+position = Vector2(312, 728)
 scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
