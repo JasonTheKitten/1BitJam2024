@@ -1,17 +1,24 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnysef7ukcbog"]
+[gd_scene load_steps=15 format=3 uid="uid://dnysef7ukcbog"]
 
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="1_6y2o4"]
+[ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="1_18n86"]
 [ext_resource type="Texture2D" uid="uid://cp7lt5qxt6mid" path="res://assets/ladder.png" id="1_b13ym"]
 [ext_resource type="Texture2D" uid="uid://dlce452qw0qe8" path="res://assets/press_e.png" id="1_iufpy"]
+[ext_resource type="Script" path="res://levels/level_1.gd" id="1_uufqg"]
 [ext_resource type="Texture2D" uid="uid://dpo1wnmh36tsj" path="res://assets/deadly_spike_pit.png" id="2_e2n53"]
-[ext_resource type="PackedScene" uid="uid://d0llr3edd2g6x" path="res://entities/player/Player.tscn" id="2_p8eo7"]
+[ext_resource type="PackedScene" uid="uid://qo4nyl0xcy4o" path="res://entities/player/player.tscn" id="2_p8eo7"]
 [ext_resource type="Texture2D" uid="uid://cn33jtj0noabp" path="res://assets/tower_inner_wall.png" id="3_jv8n0"]
 [ext_resource type="Texture2D" uid="uid://ce3h6sjgq532s" path="res://assets/platform.png" id="4_tdjd3"]
 [ext_resource type="Texture2D" uid="uid://5tiflkt7eoch" path="res://assets/reverso.png" id="5_xjhd8"]
 [ext_resource type="Script" path="res://entities/platform.gd" id="7_gh2au"]
 [ext_resource type="Texture2D" uid="uid://cv2ahchkvf8m" path="res://assets/press_s.png" id="8_gl1xj"]
+[ext_resource type="Script" path="res://entities/spike_pit.gd" id="11_hpd7a"]
+[ext_resource type="Script" path="res://entities/spawner.gd" id="12_mpw0l"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits")]
+script = ExtResource("1_uufqg")
+_spawner = NodePath("Marker2D")
+_spike_pits = [NodePath("SpikeTest/SpikeTestSpikes"), NodePath("HarderTest/HarderTestSpikes"), NodePath("Demo/DemoSpikes")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
@@ -19,9 +26,84 @@ limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1712, 136)
+texture = ExtResource("1_18n86")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1712, 536)
+rotation = 3.14159
+texture = ExtResource("1_18n86")
+
 [node name="PressE" type="Sprite2D" parent="."]
 position = Vector2(288, 312)
 texture = ExtResource("1_iufpy")
+
+[node name="TransitionPlatforms" type="Node2D" parent="."]
+
+[node name="Platform1" type="StaticBody2D" parent="TransitionPlatforms"]
+position = Vector2(1744, 924)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
+
+[node name="Sprite2D" type="Sprite2D" parent="TransitionPlatforms/Platform1"]
+texture_repeat = 2
+texture = ExtResource("4_tdjd3")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 8)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TransitionPlatforms/Platform1"]
+scale = Vector2(1.5, 1)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="Platform2" type="StaticBody2D" parent="TransitionPlatforms"]
+position = Vector2(1744, 828)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
+
+[node name="Sprite2D" type="Sprite2D" parent="TransitionPlatforms/Platform2"]
+texture_repeat = 2
+texture = ExtResource("4_tdjd3")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 8)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TransitionPlatforms/Platform2"]
+scale = Vector2(1.5, 1)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="Platform3" type="StaticBody2D" parent="TransitionPlatforms"]
+position = Vector2(176, 716)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
+
+[node name="Sprite2D" type="Sprite2D" parent="TransitionPlatforms/Platform3"]
+texture_repeat = 2
+texture = ExtResource("4_tdjd3")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 8)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TransitionPlatforms/Platform3"]
+scale = Vector2(1.5, 1)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="Platform4" type="StaticBody2D" parent="TransitionPlatforms"]
+position = Vector2(176, 620)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_gh2au")
+
+[node name="Sprite2D" type="Sprite2D" parent="TransitionPlatforms/Platform4"]
+texture_repeat = 2
+texture = ExtResource("4_tdjd3")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 8)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TransitionPlatforms/Platform4"]
+scale = Vector2(1.5, 1)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="Ladder" type="StaticBody2D" parent="."]
 position = Vector2(192, 160)
@@ -266,16 +348,20 @@ region_rect = Rect2(0, 0, 96, 8)
 scale = Vector2(1.5, 1)
 polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
-[node name="HarderTestSpikes" type="StaticBody2D" parent="HarderTest"]
-position = Vector2(920, 600)
+[node name="HarderTestSpikes" type="Area2D" parent="HarderTest"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("11_hpd7a")
 
 [node name="Sprite2D" type="Sprite2D" parent="HarderTest/HarderTestSpikes"]
 texture_repeat = 2
+position = Vector2(920, 600)
 texture = ExtResource("2_e2n53")
 region_enabled = true
 region_rect = Rect2(0, 0, 1280, 64)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HarderTest/HarderTestSpikes"]
+position = Vector2(920, 600)
 scale = Vector2(20, 1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
@@ -469,21 +555,26 @@ region_rect = Rect2(0, 0, 96, 8)
 scale = Vector2(1.5, 1)
 polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
-[node name="SpikeTestSpikes" type="StaticBody2D" parent="SpikeTest"]
-position = Vector2(920, 600)
+[node name="SpikeTestSpikes" type="Area2D" parent="SpikeTest"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("11_hpd7a")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/SpikeTestSpikes"]
 texture_repeat = 2
+position = Vector2(920, 600)
 texture = ExtResource("2_e2n53")
 region_enabled = true
 region_rect = Rect2(0, 0, 1280, 64)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeTest/SpikeTestSpikes"]
+position = Vector2(920, 600)
 scale = Vector2(20, 1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="SpikeTestFloor" type="StaticBody2D" parent="SpikeTest"]
 position = Vector2(1036, 648)
+collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="SpikeTest/SpikeTestFloor"]
 texture_repeat = 2
@@ -497,16 +588,20 @@ polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Demo" type="Node2D" parent="."]
 
-[node name="DemoSpikes" type="StaticBody2D" parent="Demo"]
-position = Vector2(832, 984)
+[node name="DemoSpikes" type="Area2D" parent="Demo"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("11_hpd7a")
 
 [node name="Sprite2D" type="Sprite2D" parent="Demo/DemoSpikes"]
 texture_repeat = 2
+position = Vector2(832, 984)
 texture = ExtResource("2_e2n53")
 region_enabled = true
 region_rect = Rect2(0, 0, 1152, 64)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Demo/DemoSpikes"]
+position = Vector2(832, 984)
 scale = Vector2(18, 1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
@@ -548,7 +643,7 @@ region_rect = Rect2(0, 0, 1408, 32)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Demo/DemoWall2"]
 scale = Vector2(22, 0.5)
-polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygon = PackedVector2Array(32, 32, -29.61, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="DemoPlatform1" type="StaticBody2D" parent="Demo"]
 position = Vector2(1456, 924)
@@ -646,5 +741,7 @@ position = Vector2(312, 728)
 scale = Vector2(1, 2)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
-[node name="Player" parent="." instance=ExtResource("2_p8eo7")]
+[node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(192, 984)
+script = ExtResource("12_mpw0l")
+_player_scene = ExtResource("2_p8eo7")
