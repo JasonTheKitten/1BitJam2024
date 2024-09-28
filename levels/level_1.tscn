@@ -20,9 +20,9 @@
 position = Vector2(1, 0)
 script = ExtResource("1_uufqg")
 _spawner = NodePath("Marker2D")
-_spike_pits = [NodePath("SpikeTest/SpikeTestSpikes"), NodePath("HarderTest/HarderTestSpikes"), NodePath("Demo/DemoSpikes")]
+_spike_pits = [NodePath("Demo/DemoSpikes"), NodePath("SpikeTest/SpikeTestSpikes"), NodePath("HarderTest/HarderTestSpikes")]
 _reversos = [NodePath("ReversoTutorial/Reverso1"), NodePath("ReversoTutorial/Reverso2"), NodePath("ReversoTutorial/Reverso3"), NodePath("ReversoTutorial/Reverso4"), NodePath("ReversoTutorial/Reverso5"), NodePath("SpikeTest/Reversos/Reverso1"), NodePath("SpikeTest/Reversos/Reverso2"), NodePath("SpikeTest/Reversos/Reverso3"), NodePath("SpikeTest/Reversos/Reverso4"), NodePath("HarderTest/Reversos/Reverso1"), NodePath("HarderTest/Reversos/Reverso2"), NodePath("HarderTest/Reversos/Reverso3"), NodePath("HarderTest/Reversos/Reverso4")]
-_gravity_switches = [NodePath("GravityUpSwitch"), NodePath("GravityDownSwitch")]
+_gravity_switches = [NodePath("GravityDownSwitch"), NodePath("GravityUpSwitch")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
@@ -32,6 +32,8 @@ limit_bottom = 1080
 
 [node name="GravityDownSwitch" type="Area2D" parent="."]
 position = Vector2(0, -24)
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("2_qdi6j")
 
 [node name="Sprite2D" type="Sprite2D" parent="GravityDownSwitch"]
@@ -43,9 +45,12 @@ position = Vector2(1712, 136)
 scale = Vector2(0.1, 1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
-[node name="GravityUpSwitch" type="Area2D" parent="."]
+[node name="GravityUpSwitch" type="Area2D" parent="." node_paths=PackedStringArray("_target_section")]
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("2_qdi6j")
 _orientation = 2
+_target_section = NodePath("../GravityDownSwitch")
 
 [node name="Sprite2D" type="Sprite2D" parent="GravityUpSwitch"]
 position = Vector2(1712, 536)

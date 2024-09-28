@@ -9,7 +9,8 @@ var _had_zero_frame : bool = false
 var _has_safe_frames : bool = true
 var _speed_multiplier : float = 1
 var _gravity_orientation: GravityOrientation = GravityOrientation.DOWN
-var _movement_disabled_until_collide: bool = false
+var _movement_disabled_until_collide: Area2D = null
+var _has_active_collision : bool = false
 
 
 func _physics_process(_delta: float) -> void:
@@ -31,10 +32,10 @@ func _physics_process(_delta: float) -> void:
 		_had_zero_frame = false
 		movement_vector.y = -_jump_velocity
 	else:
-		_had_zero_frame = velocity.y == 0
+		_had_zero_frame = is_jump_velocity_zero
 		movement_vector.y = _gravity
 		
-	if _movement_disabled_until_collide:
+	if !(_movement_disabled_until_collide == null || _has_active_collision):
 		movement_vector.x = 0
 		movement_vector.y = _gravity
 		
@@ -45,16 +46,24 @@ func _physics_process(_delta: float) -> void:
 		GravityOrientation.UP:
 			velocity.x = movement_vector.x
 			velocity.y -= movement_vector.y
-		_:
-			pass # TODO: Other orientations
+		GravityOrientation.RIGHT:
+			velocity.x += movement_vector.y
+			velocity.y = -movement_vector.x
+		GravityOrientation.LEFT:
+			velocity.x -= movement_vector.y
+			velocity.y = -movement_vector.x
 		
 	if velocity.y < 0:
 		collision_mask &= ~2
 	else:
 		collision_mask |= 2
 		
-	var collision_occured: bool = move_and_slide()
-	_movement_disabled_until_collide = _movement_disabled_until_collide && !collision_occured
+	_has_active_collision = move_and_slide()
+	if (
+		_movement_disabled_until_collide != null
+		&& _movement_disabled_until_collide.overlaps_body(self)
+	):
+		_movement_disabled_until_collide = null
 
 
 func tpfreeze() -> void:
@@ -62,7 +71,7 @@ func tpfreeze() -> void:
 	_speed_multiplier = 1
 	_has_safe_frames = true
 	_gravity_orientation = GravityOrientation.DOWN
-	_movement_disabled_until_collide = false
+	_movement_disabled_until_collide = null
 	
 
 func set_speed_multiplier(speed_multiplier: float) -> void:
@@ -71,8 +80,8 @@ func set_speed_multiplier(speed_multiplier: float) -> void:
 func set_gravity_orientation(orientation: GravityOrientation) -> void:
 	_gravity_orientation = orientation
 	
-func force_player_collide() -> void:
-	_movement_disabled_until_collide = true
+func force_player_collide(target_collision: CollisionObject2D) -> void:
+	_movement_disabled_until_collide = target_collision
 
 enum GravityOrientation {
 	DOWN,

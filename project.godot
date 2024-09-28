@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="1BitJam"
-run/main_scene="res://levels/level_1.tscn"
+run/main_scene="res://levels/level_2.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,8 @@ gdscript/warnings/untyped_declaration=2
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/resizable=false
+window/main_scene="res://levels/level_1.tscn"
+window/default_gravity=9.8
 
 [input]
 
