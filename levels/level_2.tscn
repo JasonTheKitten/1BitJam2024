@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cip8j2dhbv5ow"]
+[gd_scene load_steps=17 format=3 uid="uid://cip8j2dhbv5ow"]
 
 [ext_resource type="Script" path="res://levels/level_2.gd" id="1_dbu2h"]
 [ext_resource type="Script" path="res://entities/gravity_switch.gd" id="2_o20aq"]
+[ext_resource type="Script" path="res://entities/ladder.gd" id="3_oxr6y"]
 [ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="3_voenv"]
 [ext_resource type="Script" path="res://entities/platform.gd" id="4_wcheb"]
 [ext_resource type="Texture2D" uid="uid://ce3h6sjgq532s" path="res://assets/platform.png" id="5_vdhci"]
@@ -82,6 +83,10 @@ scale = Vector2(1, 17)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Ladder" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_oxr6y")
+_next_level = null
 
 [node name="Sprite2D" type="Sprite2D" parent="Ladder"]
 position = Vector2(192, 160)
