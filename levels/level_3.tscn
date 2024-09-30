@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bcmlgp0xq7c7a"]
+[gd_scene load_steps=17 format=3 uid="uid://bcmlgp0xq7c7a"]
 
 [ext_resource type="Script" path="res://entities/ladder.gd" id="1_bbna5"]
 [ext_resource type="Script" path="res://levels/level_controller.gd" id="1_emce8"]
+[ext_resource type="PackedScene" uid="uid://dp5ygov7ovdlk" path="res://levels/level_4.tscn" id="3_65b18"]
 [ext_resource type="Texture2D" uid="uid://cp7lt5qxt6mid" path="res://assets/ladder.png" id="3_blene"]
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="4_mnj02"]
 [ext_resource type="Texture2D" uid="uid://cl25vp5n5jmtf" path="res://assets/mirror.png" id="5_2ltxh"]
@@ -32,6 +33,7 @@ limit_bottom = 1080
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_bbna5")
+_next_level = ExtResource("3_65b18")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ladder"]
 position = Vector2(192, 160)

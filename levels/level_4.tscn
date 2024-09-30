@@ -1,0 +1,469 @@
+[gd_scene load_steps=13 format=3 uid="uid://dp5ygov7ovdlk"]
+
+[ext_resource type="Script" path="res://levels/level_controller.gd" id="1_3turo"]
+[ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="2_20q5m"]
+[ext_resource type="Script" path="res://entities/ladder.gd" id="3_ukffs"]
+[ext_resource type="Texture2D" uid="uid://cp7lt5qxt6mid" path="res://assets/ladder.png" id="5_v8upi"]
+[ext_resource type="Script" path="res://entities/spike_pit.gd" id="6_n3we3"]
+[ext_resource type="Script" path="res://entities/reverso.gd" id="8_2q8e5"]
+[ext_resource type="Script" path="res://entities/gravity_switch.gd" id="10_mnvs8"]
+[ext_resource type="Texture2D" uid="uid://cn33jtj0noabp" path="res://assets/tower_inner_wall.png" id="12_n1b22"]
+[ext_resource type="Script" path="res://entities/platform.gd" id="13_xn576"]
+[ext_resource type="Script" path="res://entities/spawner.gd" id="15_soabi"]
+[ext_resource type="PackedScene" uid="uid://qo4nyl0xcy4o" path="res://entities/player/player.tscn" id="16_imrkc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f675v"]
+size = Vector2(62, 105)
+
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_reversos", "_gravity_switches")]
+script = ExtResource("1_3turo")
+_spawner = NodePath("Marker2D")
+_spike_pits = [NodePath("SpikePit1")]
+_reversos = [NodePath("Reverso1"), NodePath("Reverso2")]
+_gravity_switches = [NodePath("GravitySwitches/GravitySwitch2"), NodePath("GravitySwitches/GravitySwitch3"), NodePath("GravitySwitches/GravitySwitch4"), NodePath("GravitySwitches/GravitySwitch5"), NodePath("GravitySwitches/GravitySwitch6"), NodePath("GravitySwitches/GravitySwitch7"), NodePath("GravitySwitches/GravitySwitch8"), NodePath("GravitySwitches/GravitySwitch9"), NodePath("GravitySwitches/GravitySwitch10"), NodePath("GravitySwitches/GravitySwitch11"), NodePath("GravitySwitches/GravitySwitch12"), NodePath("GravitySwitches/GravitySwitch13"), NodePath("GravitySwitches/GravitySwitch14"), NodePath("GravitySwitches/GravitySwitch15"), NodePath("GravitySwitches/GravitySwitch16"), NodePath("GravitySwitches/GravitySwitch17"), NodePath("GravitySwitches/GravitySwitch18"), NodePath("GravitySwitches/GravitySwitch19"), NodePath("GravitySwitches/GravitySwitch20"), NodePath("GravitySwitches/GravitySwitch21"), NodePath("GravitySwitches/GravitySwitch22")]
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Ceiling" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(1024, 32)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Ceiling"]
+rotation = 1.5708
+texture = ExtResource("2_20q5m")
+region_enabled = true
+region_rect = Rect2(0, -4, 64, 1536)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/Ceiling"]
+scale = Vector2(24, 1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="BottomFloor" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(960, 1048)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/BottomFloor"]
+rotation = 1.5708
+texture = ExtResource("2_20q5m")
+region_enabled = true
+region_rect = Rect2(0, -4, 64, 1792)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/BottomFloor"]
+scale = Vector2(28, 1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(96, 540)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/LeftWall"]
+texture = ExtResource("2_20q5m")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 1080)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/LeftWall"]
+scale = Vector2(1, 17)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(1824, 540)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/RightWall"]
+texture = ExtResource("2_20q5m")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 1080)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/RightWall"]
+scale = Vector2(1, 17)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Ladder" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_ukffs")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ladder"]
+position = Vector2(192, 160)
+texture = ExtResource("5_v8upi")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ladder"]
+position = Vector2(192, 160)
+polygon = PackedVector2Array(64, 160, -64, 160, -64, -160, 64, -160)
+
+[node name="SpikePit1" type="Area2D" parent="."]
+position = Vector2(1280, 280)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_n3we3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikePit1"]
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Reverso2" type="Area2D" parent="."]
+position = Vector2(400, 608)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("8_2q8e5")
+_speed_multiplier = -1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Reverso2"]
+scale = Vector2(0.25, 1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Reverso1" type="Area2D" parent="."]
+position = Vector2(736, 384)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("8_2q8e5")
+_speed_multiplier = -1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Reverso1"]
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitches" type="Node2D" parent="."]
+
+[node name="GravitySwitch22" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1012, 474)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 1
+_target_section = NodePath("Area2D")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch22"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Area2D" type="Area2D" parent="GravitySwitches/GravitySwitch22"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravitySwitches/GravitySwitch22/Area2D"]
+position = Vector2(-853, 10.5)
+shape = SubResource("RectangleShape2D_f675v")
+
+[node name="GravitySwitch21" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1180, 483)
+rotation = -1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 2
+_target_section = NodePath("../GravitySwitch7")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch21"]
+rotation = 3.14159
+scale = Vector2(0.5, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch20" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1093, 800)
+rotation = -1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 2
+_target_section = NodePath("../../RandomBarrierArea")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch20"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch19" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1440, 160)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_target_section = NodePath("../GravitySwitch17")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch19"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch18" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1568, 272)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_target_section = NodePath("../GravitySwitch16")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch18"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch17" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1456, 278)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 3
+_target_section = NodePath("../GravitySwitch18")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch17"]
+rotation = 3.14159
+scale = Vector2(0.5, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch16" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1568, 544)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 1
+_target_section = NodePath("../GravitySwitch15")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch16"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch15" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(400, 544)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_target_section = NodePath("../../Reverso2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch15"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch14" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(325, 736)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_target_section = NodePath("../GravitySwitch5/Target")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch14"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch13" type="Area2D" parent="GravitySwitches"]
+position = Vector2(412, 800)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 3
+_target_section = NodePath("")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch13"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch12" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1285, 736)
+rotation = -1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 2
+_target_section = NodePath("../../SpikePit1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch12"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch11" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(501, 736)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 3
+_target_section = NodePath("../GravitySwitch12")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch11"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch10" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(501, 160)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_target_section = NodePath("../GravitySwitch11")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch10"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch9" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1376, 276)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 1
+_target_section = NodePath("../../Ladder")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch9"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch8" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1376, 920)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 2
+_target_section = NodePath("../GravitySwitch9")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch8"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch7" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1184, 276)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 1
+_target_section = NodePath("../../Ladder")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch7"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch6" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(1696, 384)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 1
+_target_section = NodePath("../GravitySwitch2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch6"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch5" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(325, 96)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_target_section = NodePath("Target")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch5"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Target" type="Area2D" parent="GravitySwitches/GravitySwitch5"]
+position = Vector2(888, 0)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch5/Target"]
+rotation = 3.14159
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch4" type="Area2D" parent="GravitySwitches"]
+position = Vector2(1760, 96)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch4"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch3" type="Area2D" parent="GravitySwitches"]
+position = Vector2(1760, 920)
+rotation = -3.14159
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_orientation = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch3"]
+rotation = 3.14159
+scale = Vector2(1, 0.1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch2" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
+position = Vector2(158, 384)
+rotation = -3.14159
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("10_mnvs8")
+_target_section = NodePath("Target")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch2"]
+rotation = 3.14159
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Target" type="Area2D" parent="GravitySwitches/GravitySwitch2"]
+position = Vector2(0, -600)
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch2/Target"]
+position = Vector2(-2, 0)
+rotation = 3.14159
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(410, 767)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("13_xn576")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform1"]
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="RandomBarrierArea" type="Area2D" parent="."]
+position = Vector2(0, 20)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RandomBarrierArea"]
+position = Vector2(1093, 432)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="RandomBarrier" type="StaticBody2D" parent="."]
+position = Vector2(0, 20)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RandomBarrier"]
+position = Vector2(1093, 432)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(277, 152)
+rotation = 1.5708
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
+texture_repeat = 2
+texture = ExtResource("12_n1b22")
+region_enabled = true
+region_rect = Rect2(0, 0, 176, 32)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall2"]
+scale = Vector2(2.75, 0.5)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(192, 984)
+script = ExtResource("15_soabi")
+_player_scene = ExtResource("16_imrkc")
