@@ -1,0 +1,267 @@
+[gd_scene load_steps=16 format=3 uid="uid://bcmlgp0xq7c7a"]
+
+[ext_resource type="Script" path="res://entities/ladder.gd" id="1_bbna5"]
+[ext_resource type="Script" path="res://levels/level_controller.gd" id="1_emce8"]
+[ext_resource type="Texture2D" uid="uid://cp7lt5qxt6mid" path="res://assets/ladder.png" id="3_blene"]
+[ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="4_mnj02"]
+[ext_resource type="Texture2D" uid="uid://cl25vp5n5jmtf" path="res://assets/mirror.png" id="5_2ltxh"]
+[ext_resource type="Script" path="res://entities/spawner.gd" id="5_lyp0k"]
+[ext_resource type="Script" path="res://entities/platform.gd" id="6_7rng4"]
+[ext_resource type="Script" path="res://entities/player_mirrored.gd" id="6_48s7o"]
+[ext_resource type="Script" path="res://entities/spike_pit.gd" id="6_ga43g"]
+[ext_resource type="PackedScene" uid="uid://qo4nyl0xcy4o" path="res://entities/player/player.tscn" id="6_nav2v"]
+[ext_resource type="Texture2D" uid="uid://ce3h6sjgq532s" path="res://assets/platform.png" id="6_sg678"]
+[ext_resource type="Texture2D" uid="uid://dpo1wnmh36tsj" path="res://assets/deadly_spike_pit.png" id="6_yv1mg"]
+[ext_resource type="Texture2D" uid="uid://blm6mqb5ka26j" path="res://assets/player.png" id="7_5ovue"]
+[ext_resource type="Script" path="res://entities/gravity_switch.gd" id="8_utgdo"]
+[ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="9_poww8"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_gravity_switches")]
+script = ExtResource("1_emce8")
+_spawner = NodePath("Marker2D")
+_spike_pits = [NodePath("SpikePits/SpikePit1"), NodePath("SpikePits/SpikePit2"), NodePath("SpikePits/SpikePit3")]
+_gravity_switches = [NodePath("GravitySwitches/GravitySwitch1"), NodePath("GravitySwitches/GravitySwitch2")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
+
+[node name="Ladder" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_bbna5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ladder"]
+position = Vector2(192, 160)
+texture = ExtResource("3_blene")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ladder"]
+position = Vector2(192, 160)
+polygon = PackedVector2Array(64, 160, -64, 160, -64, -160, 64, -160)
+
+[node name="Mirror" type="StaticBody2D" parent="."]
+process_physics_priority = 1
+position = Vector2(960, 540)
+
+[node name="Sprite2D" type="Sprite2D" parent="Mirror"]
+texture_repeat = 2
+texture = ExtResource("5_2ltxh")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 952)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mirror"]
+scale = Vector2(1, 60)
+polygon = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Ceiling" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(1024, 32)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Ceiling"]
+rotation = 1.5708
+texture = ExtResource("4_mnj02")
+region_enabled = true
+region_rect = Rect2(0, -4, 64, 1536)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/Ceiling"]
+scale = Vector2(24, 1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="BottomFloor" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(960, 1048)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/BottomFloor"]
+rotation = 1.5708
+texture = ExtResource("4_mnj02")
+region_enabled = true
+region_rect = Rect2(0, -4, 64, 1792)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/BottomFloor"]
+scale = Vector2(28, 1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(96, 540)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/LeftWall"]
+texture = ExtResource("4_mnj02")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 1080)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/LeftWall"]
+scale = Vector2(1, 17)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(1824, 540)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/RightWall"]
+texture = ExtResource("4_mnj02")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 1080)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/RightWall"]
+scale = Vector2(1, 17)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Platform1" type="StaticBody2D" parent="Platforms"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_7rng4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform1"]
+position = Vector2(912, 824)
+texture = ExtResource("6_sg678")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform1"]
+position = Vector2(912, 824)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="Platform2" type="StaticBody2D" parent="Platforms"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_7rng4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform2"]
+position = Vector2(912, 920)
+texture = ExtResource("6_sg678")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2"]
+position = Vector2(912, 920)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="Platform3" type="StaticBody2D" parent="Platforms"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_7rng4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform3"]
+position = Vector2(1200, 824)
+texture = ExtResource("6_sg678")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform3"]
+position = Vector2(720, 824)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="Platform4" type="StaticBody2D" parent="Platforms"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_7rng4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform4"]
+position = Vector2(1360, 824)
+texture = ExtResource("6_sg678")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform4"]
+position = Vector2(560, 824)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="Platform5" type="StaticBody2D" parent="Platforms"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_7rng4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform5"]
+texture_repeat = 2
+position = Vector2(304, 824)
+texture = ExtResource("6_sg678")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 8)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform5"]
+position = Vector2(304, 824)
+scale = Vector2(4, 1)
+polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="GravitySwitches" type="Node2D" parent="."]
+
+[node name="GravitySwitch1" type="Area2D" parent="GravitySwitches"]
+script = ExtResource("8_utgdo")
+_orientation = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="GravitySwitches/GravitySwitch1"]
+position = Vector2(208, 709)
+rotation = 3.14159
+texture = ExtResource("9_poww8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch1"]
+position = Vector2(208, 709)
+rotation = -3.14159
+scale = Vector2(0.1, 1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="GravitySwitch2" type="Area2D" parent="GravitySwitches"]
+script = ExtResource("8_utgdo")
+_orientation = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="GravitySwitches/GravitySwitch2"]
+position = Vector2(1616, 645)
+rotation = 3.14159
+texture = ExtResource("9_poww8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch2"]
+position = Vector2(304, 645)
+rotation = -3.14159
+scale = Vector2(0.1, 1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="SpikePits" type="Node2D" parent="."]
+
+[node name="SpikePit3" type="Area2D" parent="SpikePits"]
+script = ExtResource("6_ga43g")
+
+[node name="Sprite2D" type="Sprite2D" parent="SpikePits/SpikePit3"]
+position = Vector2(1712, 581)
+texture = ExtResource("6_yv1mg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikePits/SpikePit3"]
+position = Vector2(208, 581)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="SpikePit2" type="Area2D" parent="SpikePits"]
+script = ExtResource("6_ga43g")
+
+[node name="Sprite2D" type="Sprite2D" parent="SpikePits/SpikePit2"]
+position = Vector2(544, 984)
+texture = ExtResource("6_yv1mg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikePits/SpikePit2"]
+position = Vector2(544, 984)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="SpikePit1" type="Area2D" parent="SpikePits"]
+script = ExtResource("6_ga43g")
+
+[node name="Sprite2D" type="Sprite2D" parent="SpikePits/SpikePit1"]
+position = Vector2(1568, 984)
+texture = ExtResource("6_yv1mg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikePits/SpikePit1"]
+position = Vector2(352, 984)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Marker2D" type="Marker2D" parent="." node_paths=PackedStringArray("_current_player")]
+position = Vector2(192, 984)
+script = ExtResource("5_lyp0k")
+_current_player = NodePath("../CharacterBody2D")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("6_nav2v")]
+
+[node name="MirroredCharacter" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_player")]
+script = ExtResource("6_48s7o")
+_player = NodePath("../CharacterBody2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="MirroredCharacter"]
+texture = ExtResource("7_5ovue")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MirroredCharacter"]
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)

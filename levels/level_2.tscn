@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cip8j2dhbv5ow"]
+[gd_scene load_steps=18 format=3 uid="uid://cip8j2dhbv5ow"]
 
-[ext_resource type="Script" path="res://levels/level_2.gd" id="1_dbu2h"]
+[ext_resource type="Script" path="res://levels/level_controller.gd" id="1_hgqjk"]
 [ext_resource type="Script" path="res://entities/gravity_switch.gd" id="2_o20aq"]
 [ext_resource type="Script" path="res://entities/ladder.gd" id="3_oxr6y"]
 [ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="3_voenv"]
+[ext_resource type="PackedScene" uid="uid://bcmlgp0xq7c7a" path="res://levels/level_3.tscn" id="4_o147l"]
 [ext_resource type="Script" path="res://entities/platform.gd" id="4_wcheb"]
 [ext_resource type="Texture2D" uid="uid://ce3h6sjgq532s" path="res://assets/platform.png" id="5_vdhci"]
 [ext_resource type="Texture2D" uid="uid://cp7lt5qxt6mid" path="res://assets/ladder.png" id="6_s2ntg"]
@@ -20,7 +21,7 @@
 size = Vector2(62, 105)
 
 [node name="Level2" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_reversos", "_gravity_switches")]
-script = ExtResource("1_dbu2h")
+script = ExtResource("1_hgqjk")
 _spawner = NodePath("Marker2D")
 _spike_pits = [NodePath("SpikePit1")]
 _reversos = [NodePath("Reverso1"), NodePath("Reverso2")]
@@ -86,7 +87,7 @@ polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("3_oxr6y")
-_next_level = null
+_next_level = ExtResource("4_o147l")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ladder"]
 position = Vector2(192, 160)
@@ -244,7 +245,7 @@ texture = ExtResource("3_voenv")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch17"]
 rotation = 3.14159
-scale = Vector2(1, 0.1)
+scale = Vector2(0.5, 0.1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="GravitySwitch16" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]

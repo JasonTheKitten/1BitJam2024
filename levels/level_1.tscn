@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="1_6y2o4"]
 [ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="1_18n86"]
 [ext_resource type="Texture2D" uid="uid://cp7lt5qxt6mid" path="res://assets/ladder.png" id="1_b13ym"]
-[ext_resource type="Script" path="res://levels/level_1.gd" id="1_uufqg"]
+[ext_resource type="Script" path="res://levels/level_controller.gd" id="1_uufqg"]
 [ext_resource type="Texture2D" uid="uid://dpo1wnmh36tsj" path="res://assets/deadly_spike_pit.png" id="2_e2n53"]
 [ext_resource type="PackedScene" uid="uid://qo4nyl0xcy4o" path="res://entities/player/player.tscn" id="2_p8eo7"]
 [ext_resource type="Script" path="res://entities/gravity_switch.gd" id="2_qdi6j"]
