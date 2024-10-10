@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dnysef7ukcbog"]
+[gd_scene load_steps=20 format=3 uid="uid://dnysef7ukcbog"]
 
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="1_6y2o4"]
 [ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="1_18n86"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dpo1wnmh36tsj" path="res://assets/deadly_spike_pit.png" id="2_e2n53"]
 [ext_resource type="PackedScene" uid="uid://qo4nyl0xcy4o" path="res://entities/player/player.tscn" id="2_p8eo7"]
 [ext_resource type="Script" path="res://entities/gravity_switch.gd" id="2_qdi6j"]
+[ext_resource type="Script" path="res://entities/checkpoint.gd" id="2_y6gds"]
 [ext_resource type="Texture2D" uid="uid://cn33jtj0noabp" path="res://assets/tower_inner_wall.png" id="3_jv8n0"]
 [ext_resource type="Texture2D" uid="uid://ce3h6sjgq532s" path="res://assets/platform.png" id="4_tdjd3"]
 [ext_resource type="Texture2D" uid="uid://5tiflkt7eoch" path="res://assets/reverso.png" id="5_xjhd8"]
@@ -18,19 +19,36 @@
 [ext_resource type="Script" path="res://entities/spawner.gd" id="12_mpw0l"]
 [ext_resource type="Script" path="res://entities/reverso.gd" id="13_ucvtt"]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_reversos", "_gravity_switches")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmy6y"]
+size = Vector2(151, 20)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_reversos", "_gravity_switches", "_checkpoints")]
 position = Vector2(1, 0)
 script = ExtResource("1_uufqg")
 _spawner = NodePath("Marker2D")
 _spike_pits = [NodePath("Demo/DemoSpikes"), NodePath("SpikeTest/SpikeTestSpikes"), NodePath("HarderTest/HarderTestSpikes")]
 _reversos = [NodePath("ReversoTutorial/Reverso1"), NodePath("ReversoTutorial/Reverso2"), NodePath("ReversoTutorial/Reverso3"), NodePath("ReversoTutorial/Reverso4"), NodePath("ReversoTutorial/Reverso5"), NodePath("SpikeTest/Reversos/Reverso1"), NodePath("SpikeTest/Reversos/Reverso2"), NodePath("SpikeTest/Reversos/Reverso3"), NodePath("SpikeTest/Reversos/Reverso4"), NodePath("HarderTest/Reversos/Reverso1"), NodePath("HarderTest/Reversos/Reverso2"), NodePath("HarderTest/Reversos/Reverso3"), NodePath("HarderTest/Reversos/Reverso4")]
 _gravity_switches = [NodePath("GravityDownSwitch"), NodePath("GravityUpSwitch")]
+_checkpoints = [NodePath("Checkpoint")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
 limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
+
+[node name="Checkpoint" type="Area2D" parent="." node_paths=PackedStringArray("_respawn_point")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_y6gds")
+_respawn_point = NodePath("Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+position = Vector2(204.5, 605)
+shape = SubResource("RectangleShape2D_kmy6y")
+
+[node name="Marker2D" type="Marker2D" parent="Checkpoint"]
+position = Vector2(439, 729)
 
 [node name="GravityDownSwitch" type="Area2D" parent="."]
 position = Vector2(0, -24)

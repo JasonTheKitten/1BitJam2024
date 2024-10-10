@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bcmlgp0xq7c7a"]
+[gd_scene load_steps=20 format=3 uid="uid://bcmlgp0xq7c7a"]
 
 [ext_resource type="Script" path="res://entities/ladder.gd" id="1_bbna5"]
 [ext_resource type="Script" path="res://levels/level_controller.gd" id="1_emce8"]
@@ -14,13 +14,17 @@
 [ext_resource type="Texture2D" uid="uid://ce3h6sjgq532s" path="res://assets/platform.png" id="6_sg678"]
 [ext_resource type="Texture2D" uid="uid://dpo1wnmh36tsj" path="res://assets/deadly_spike_pit.png" id="6_yv1mg"]
 [ext_resource type="Texture2D" uid="uid://blm6mqb5ka26j" path="res://assets/player.png" id="7_5ovue"]
+[ext_resource type="Texture2D" uid="uid://cn33jtj0noabp" path="res://assets/tower_inner_wall.png" id="7_qhkuc"]
 [ext_resource type="Script" path="res://entities/gravity_switch.gd" id="8_utgdo"]
+[ext_resource type="Script" path="res://entities/reverso.gd" id="9_3m13q"]
+[ext_resource type="Texture2D" uid="uid://5tiflkt7eoch" path="res://assets/reverso.png" id="9_ju3sm"]
 [ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="9_poww8"]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_gravity_switches")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_reversos", "_gravity_switches")]
 script = ExtResource("1_emce8")
 _spawner = NodePath("Marker2D")
 _spike_pits = [NodePath("SpikePits/SpikePit1"), NodePath("SpikePits/SpikePit2"), NodePath("SpikePits/SpikePit3")]
+_reversos = [NodePath("Reversos/Reverso1")]
 _gravity_switches = [NodePath("GravitySwitches/GravitySwitch1"), NodePath("GravitySwitches/GravitySwitch2")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -113,6 +117,24 @@ region_rect = Rect2(0, 0, 64, 1080)
 scale = Vector2(1, 17)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
+[node name="Floors" type="Node2D" parent="."]
+
+[node name="Floor1" type="StaticBody2D" parent="Floors"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Floors/Floor1"]
+texture_repeat = 2
+position = Vector2(568, 533)
+rotation = 3.14159
+texture = ExtResource("7_qhkuc")
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 32)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Floors/Floor1"]
+position = Vector2(568, 533)
+rotation = -3.14159
+scale = Vector2(5, 1)
+polygon = PackedVector2Array(64, 16, -64, 16, -64, -16, 64, -16)
+
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="Platform1" type="StaticBody2D" parent="Platforms"]
@@ -183,6 +205,25 @@ region_rect = Rect2(0, 0, 256, 8)
 position = Vector2(304, 824)
 scale = Vector2(4, 1)
 polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
+
+[node name="Reversos" type="Node2D" parent="."]
+
+[node name="Reverso1" type="Area2D" parent="Reversos"]
+position = Vector2(64, 0)
+script = ExtResource("9_3m13q")
+_speed_multiplier = -1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Reversos/Reverso1"]
+texture_repeat = 2
+position = Vector2(560, 756)
+texture = ExtResource("9_ju3sm")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 128)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Reversos/Reverso1"]
+position = Vector2(560, 756)
+scale = Vector2(1, 2)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="GravitySwitches" type="Node2D" parent="."]
 

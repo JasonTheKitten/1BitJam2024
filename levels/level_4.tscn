@@ -152,8 +152,9 @@ _orientation = 2
 _target_section = NodePath("../GravitySwitch7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch21"]
+position = Vector2(15, 0)
 rotation = 3.14159
-scale = Vector2(0.5, 0.1)
+scale = Vector2(0.3, 0.1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="GravitySwitch20" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
@@ -171,7 +172,7 @@ scale = Vector2(1, 0.1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="GravitySwitch19" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
-position = Vector2(1440, 160)
+position = Vector2(1472, 160)
 rotation = 1.5708
 collision_layer = 0
 collision_mask = 4
@@ -205,6 +206,7 @@ _orientation = 3
 _target_section = NodePath("../GravitySwitch18")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch17"]
+position = Vector2(15, 0)
 rotation = 3.14159
 scale = Vector2(0.5, 0.1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -311,7 +313,7 @@ _target_section = NodePath("../../Ladder")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch9"]
 rotation = 3.14159
-scale = Vector2(1, 0.1)
+scale = Vector2(0.8, 0.1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="GravitySwitch8" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
@@ -432,6 +434,7 @@ collision_mask = 0
 script = ExtResource("13_xn576")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform1"]
+scale = Vector2(0.8, 1)
 polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="RandomBarrierArea" type="Area2D" parent="."]

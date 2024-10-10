@@ -175,8 +175,9 @@ rotation = 4.71239
 texture = ExtResource("3_voenv")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch21"]
+position = Vector2(15, 0)
 rotation = 3.14159
-scale = Vector2(0.5, 0.1)
+scale = Vector2(0.3, 0.1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="GravitySwitch20" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
@@ -198,7 +199,7 @@ scale = Vector2(1, 0.1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="GravitySwitch19" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
-position = Vector2(1440, 160)
+position = Vector2(1472, 160)
 rotation = 1.5708
 collision_layer = 0
 collision_mask = 4
@@ -244,6 +245,7 @@ rotation = 4.71239
 texture = ExtResource("3_voenv")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch17"]
+position = Vector2(15, 0)
 rotation = 3.14159
 scale = Vector2(0.5, 0.1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -382,7 +384,7 @@ texture = ExtResource("3_voenv")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravitySwitches/GravitySwitch9"]
 rotation = 3.14159
-scale = Vector2(1, 0.1)
+scale = Vector2(0.8, 0.1)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="GravitySwitch8" type="Area2D" parent="GravitySwitches" node_paths=PackedStringArray("_target_section")]
@@ -568,6 +570,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 96, 8)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform1"]
+scale = Vector2(0.8, 1)
 polygon = PackedVector2Array(32, 4, -32, 4, -32, -4, 32, -4)
 
 [node name="RandomBarrierArea" type="Area2D" parent="."]
@@ -622,6 +625,6 @@ scale = Vector2(2.75, 0.5)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(192, 984)
+position = Vector2(160, 984)
 script = ExtResource("14_a6b4l")
 _player_scene = ExtResource("15_rucy2")
