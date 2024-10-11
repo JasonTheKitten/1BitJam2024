@@ -1,14 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cv4gma2tkjvw6"]
+[gd_scene load_steps=7 format=3 uid="uid://cv4gma2tkjvw6"]
 
 [ext_resource type="Script" path="res://levels/level_controller.gd" id="1_20myk"]
 [ext_resource type="Texture2D" uid="uid://bl63uc3p48y0f" path="res://assets/winscreen.png" id="2_4u2ll"]
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="2_xgph2"]
 [ext_resource type="Script" path="res://entities/dragon.gd" id="4_eapxy"]
 [ext_resource type="Texture2D" uid="uid://b80amwe80bty3" path="res://assets/pixel_dragon.png" id="4_gkej1"]
+[ext_resource type="AudioStream" uid="uid://b7vy873ydrhgs" path="res://assets/background_music.wav" id="6_or3i8"]
 
-[node name="Level2" type="Node2D" node_paths=PackedStringArray("_spawner")]
+[node name="Level6" type="Node2D"]
 script = ExtResource("1_20myk")
-_spawner = NodePath("")
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -83,3 +83,8 @@ texture = ExtResource("4_gkej1")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
 position = Vector2(904, 404)
 polygon = PackedVector2Array(64, 32, -64, 32, -64, -32, 64, -32)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_or3i8")
+volume_db = -12.93
+autoplay = true

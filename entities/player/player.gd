@@ -1,8 +1,9 @@
-class_name Dragon
+class_name Player
 extends CharacterBody2D
 
 @export var _speed: float = 30
 @export var _jump_velocity : float = 30
+@export var _audio_source: AudioStreamPlayer2D
 
 var _gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _had_zero_frame : bool = false
@@ -31,6 +32,7 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("player_jump") && is_jump_velocity_zero && _had_zero_frame:
 		_had_zero_frame = false
 		movement_vector.y = -_jump_velocity
+		_audio_source.play()
 	else:
 		_had_zero_frame = is_jump_velocity_zero
 		movement_vector.y = _gravity

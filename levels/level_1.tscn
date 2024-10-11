@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dnysef7ukcbog"]
+[gd_scene load_steps=23 format=3 uid="uid://dnysef7ukcbog"]
 
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="1_6y2o4"]
 [ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="1_18n86"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://entities/reverso.gd" id="13_ucvtt"]
 [ext_resource type="Texture2D" uid="uid://bxn7m401kf6vd" path="res://assets/skip_button.png" id="19_wg08u"]
 [ext_resource type="Script" path="res://ui/skip_level_button.gd" id="20_2lbae"]
+[ext_resource type="AudioStream" uid="uid://b7vy873ydrhgs" path="res://assets/background_music.wav" id="21_rf5sj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmy6y"]
 size = Vector2(151, 20)
@@ -861,3 +862,8 @@ offset_bottom = 1172.0
 scale = Vector2(0.4, 0.4)
 icon = ExtResource("19_wg08u")
 script = ExtResource("20_2lbae")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_rf5sj")
+volume_db = -12.93
+autoplay = true

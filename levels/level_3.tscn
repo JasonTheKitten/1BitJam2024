@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bcmlgp0xq7c7a"]
+[gd_scene load_steps=23 format=3 uid="uid://bcmlgp0xq7c7a"]
 
 [ext_resource type="Script" path="res://entities/ladder.gd" id="1_bbna5"]
 [ext_resource type="Script" path="res://levels/level_controller.gd" id="1_emce8"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="9_poww8"]
 [ext_resource type="Texture2D" uid="uid://bxn7m401kf6vd" path="res://assets/skip_button.png" id="20_20ff6"]
 [ext_resource type="Script" path="res://ui/skip_level_button.gd" id="21_k6cvl"]
+[ext_resource type="AudioStream" uid="uid://b7vy873ydrhgs" path="res://assets/background_music.wav" id="22_aloiw"]
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_level_skip_button", "_ladder", "_spike_pits", "_reversos", "_gravity_switches")]
 script = ExtResource("1_emce8")
@@ -330,3 +331,8 @@ offset_bottom = 1172.0
 scale = Vector2(0.4, 0.4)
 icon = ExtResource("20_20ff6")
 script = ExtResource("21_k6cvl")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_aloiw")
+volume_db = -12.93
+autoplay = true

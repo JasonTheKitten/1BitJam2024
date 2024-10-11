@@ -1,4 +1,4 @@
-class_name Player
+class_name Dragon
 extends CharacterBody2D
 
 @export var _speed: float = 30
@@ -13,8 +13,9 @@ func _physics_process(_delta: float) -> void:
 	velocity = Vector2(
 		Input.get_axis("player_left", "player_right") * _speed * _speed_multiplier,
 		Input.get_axis("player_up", "player_down") * _speed * _speed_multiplier)
-	
-	_sprite.flip_h = velocity.x < 0
+		
+	if (velocity.x != 0):
+		_sprite.flip_h = velocity.x < 0
 		
 	move_and_slide()
 	

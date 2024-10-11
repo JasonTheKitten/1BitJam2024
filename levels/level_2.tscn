@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cip8j2dhbv5ow"]
+[gd_scene load_steps=22 format=3 uid="uid://cip8j2dhbv5ow"]
 
 [ext_resource type="Script" path="res://levels/level_controller.gd" id="1_hgqjk"]
 [ext_resource type="Script" path="res://entities/gravity_switch.gd" id="2_o20aq"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://ctbsclv3wxvlq" path="res://assets/platform_solid.png" id="15_sfapx"]
 [ext_resource type="Texture2D" uid="uid://bxn7m401kf6vd" path="res://assets/skip_button.png" id="18_ckc1d"]
 [ext_resource type="Script" path="res://ui/skip_level_button.gd" id="19_fevvj"]
+[ext_resource type="AudioStream" uid="uid://b7vy873ydrhgs" path="res://assets/background_music.wav" id="20_tynyi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f675v"]
 size = Vector2(62, 105)
@@ -649,3 +650,8 @@ offset_bottom = 1172.0
 scale = Vector2(0.4, 0.4)
 icon = ExtResource("18_ckc1d")
 script = ExtResource("19_fevvj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_tynyi")
+volume_db = -12.93
+autoplay = true
