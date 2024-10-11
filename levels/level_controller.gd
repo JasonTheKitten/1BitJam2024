@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var _spawner: PlayerSpawner
+@export var _level_skip_button: SkipLevelButton
+@export var _ladder: Ladder
 @export var _spike_pits: Array[SpikePit]
 @export var _reversos: Array[Reverso]
 @export var _gravity_switches: Array[GravitySwitch]
@@ -15,6 +17,8 @@ func _ready() -> void:
 		gravity_switch.gravity_change.connect(_handle_gravity_switch)
 	for check_point: Checkpoint in _checkpoints:
 		check_point.reached.connect(_handle_checkpoint)
+	if (_level_skip_button != null):
+		_level_skip_button.level_skipped.connect(_on_level_skipped)
 
 
 func _handle_player_death() -> void:
@@ -32,3 +36,7 @@ func _handle_gravity_switch(
 
 func _handle_checkpoint(new_spawn_point: Marker2D) -> void:
 	_spawner.position = new_spawn_point.position
+
+
+func _on_level_skipped() -> void:
+	_ladder.trigger()

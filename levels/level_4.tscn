@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dp5ygov7ovdlk"]
+[gd_scene load_steps=17 format=3 uid="uid://dp5ygov7ovdlk"]
 
 [ext_resource type="Script" path="res://levels/level_controller.gd" id="1_3turo"]
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="2_20q5m"]
@@ -11,15 +11,19 @@
 [ext_resource type="Texture2D" uid="uid://7ofskbnw8ux1" path="res://assets/go_up.png" id="11_rv7tp"]
 [ext_resource type="Texture2D" uid="uid://cn33jtj0noabp" path="res://assets/tower_inner_wall.png" id="12_n1b22"]
 [ext_resource type="Script" path="res://entities/platform.gd" id="13_xn576"]
+[ext_resource type="Texture2D" uid="uid://bxn7m401kf6vd" path="res://assets/skip_button.png" id="14_k7je6"]
+[ext_resource type="Script" path="res://ui/skip_level_button.gd" id="15_553yc"]
 [ext_resource type="Script" path="res://entities/spawner.gd" id="15_soabi"]
 [ext_resource type="PackedScene" uid="uid://qo4nyl0xcy4o" path="res://entities/player/player.tscn" id="16_imrkc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f675v"]
 size = Vector2(62, 105)
 
-[node name="Level2" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_reversos", "_gravity_switches")]
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("_spawner", "_level_skip_button", "_ladder", "_spike_pits", "_reversos", "_gravity_switches")]
 script = ExtResource("1_3turo")
 _spawner = NodePath("Marker2D")
+_level_skip_button = NodePath("Control/Button")
+_ladder = NodePath("Ladder")
 _spike_pits = [NodePath("SpikePit1")]
 _reversos = [NodePath("Reverso1"), NodePath("Reverso2")]
 _gravity_switches = [NodePath("GravitySwitches/GravitySwitch2"), NodePath("GravitySwitches/GravitySwitch3"), NodePath("GravitySwitches/GravitySwitch4"), NodePath("GravitySwitches/GravitySwitch5"), NodePath("GravitySwitches/GravitySwitch6"), NodePath("GravitySwitches/GravitySwitch7"), NodePath("GravitySwitches/GravitySwitch8"), NodePath("GravitySwitches/GravitySwitch9"), NodePath("GravitySwitches/GravitySwitch10"), NodePath("GravitySwitches/GravitySwitch11"), NodePath("GravitySwitches/GravitySwitch12"), NodePath("GravitySwitches/GravitySwitch13"), NodePath("GravitySwitches/GravitySwitch14"), NodePath("GravitySwitches/GravitySwitch15"), NodePath("GravitySwitches/GravitySwitch16"), NodePath("GravitySwitches/GravitySwitch17"), NodePath("GravitySwitches/GravitySwitch18"), NodePath("GravitySwitches/GravitySwitch19"), NodePath("GravitySwitches/GravitySwitch20"), NodePath("GravitySwitches/GravitySwitch21"), NodePath("GravitySwitches/GravitySwitch22")]
@@ -477,3 +481,19 @@ texture = ExtResource("11_rv7tp")
 position = Vector2(192, 984)
 script = ExtResource("15_soabi")
 _player_scene = ExtResource("16_imrkc")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 1020.0
+offset_right = 440.0
+offset_bottom = 1172.0
+scale = Vector2(0.4, 0.4)
+icon = ExtResource("14_k7je6")
+script = ExtResource("15_553yc")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dnysef7ukcbog"]
+[gd_scene load_steps=22 format=3 uid="uid://dnysef7ukcbog"]
 
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="1_6y2o4"]
 [ext_resource type="Texture2D" uid="uid://c1bd6nqube74v" path="res://assets/gravity_arrow.png" id="1_18n86"]
@@ -18,14 +18,18 @@
 [ext_resource type="Script" path="res://entities/spike_pit.gd" id="11_hpd7a"]
 [ext_resource type="Script" path="res://entities/spawner.gd" id="12_mpw0l"]
 [ext_resource type="Script" path="res://entities/reverso.gd" id="13_ucvtt"]
+[ext_resource type="Texture2D" uid="uid://bxn7m401kf6vd" path="res://assets/skip_button.png" id="19_wg08u"]
+[ext_resource type="Script" path="res://ui/skip_level_button.gd" id="20_2lbae"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmy6y"]
 size = Vector2(151, 20)
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_reversos", "_gravity_switches", "_checkpoints")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_spawner", "_level_skip_button", "_ladder", "_spike_pits", "_reversos", "_gravity_switches", "_checkpoints")]
 position = Vector2(1, 0)
 script = ExtResource("1_uufqg")
 _spawner = NodePath("Marker2D")
+_level_skip_button = NodePath("Control/Button")
+_ladder = NodePath("Ladder")
 _spike_pits = [NodePath("Demo/DemoSpikes"), NodePath("SpikeTest/SpikeTestSpikes"), NodePath("HarderTest/HarderTestSpikes")]
 _reversos = [NodePath("ReversoTutorial/Reverso1"), NodePath("ReversoTutorial/Reverso2"), NodePath("ReversoTutorial/Reverso3"), NodePath("ReversoTutorial/Reverso4"), NodePath("ReversoTutorial/Reverso5"), NodePath("SpikeTest/Reversos/Reverso1"), NodePath("SpikeTest/Reversos/Reverso2"), NodePath("SpikeTest/Reversos/Reverso3"), NodePath("SpikeTest/Reversos/Reverso4"), NodePath("HarderTest/Reversos/Reverso1"), NodePath("HarderTest/Reversos/Reverso2"), NodePath("HarderTest/Reversos/Reverso3"), NodePath("HarderTest/Reversos/Reverso4")]
 _gravity_switches = [NodePath("GravityDownSwitch"), NodePath("GravityUpSwitch")]
@@ -841,3 +845,19 @@ polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 position = Vector2(192, 984)
 script = ExtResource("12_mpw0l")
 _player_scene = ExtResource("2_p8eo7")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 1020.0
+offset_right = 440.0
+offset_bottom = 1172.0
+scale = Vector2(0.4, 0.4)
+icon = ExtResource("19_wg08u")
+script = ExtResource("20_2lbae")

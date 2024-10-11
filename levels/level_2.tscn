@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cip8j2dhbv5ow"]
+[gd_scene load_steps=21 format=3 uid="uid://cip8j2dhbv5ow"]
 
 [ext_resource type="Script" path="res://levels/level_controller.gd" id="1_hgqjk"]
 [ext_resource type="Script" path="res://entities/gravity_switch.gd" id="2_o20aq"]
@@ -16,13 +16,18 @@
 [ext_resource type="Texture2D" uid="uid://cn33jtj0noabp" path="res://assets/tower_inner_wall.png" id="12_hb77c"]
 [ext_resource type="Script" path="res://entities/spawner.gd" id="14_a6b4l"]
 [ext_resource type="PackedScene" uid="uid://qo4nyl0xcy4o" path="res://entities/player/player.tscn" id="15_rucy2"]
+[ext_resource type="Texture2D" uid="uid://ctbsclv3wxvlq" path="res://assets/platform_solid.png" id="15_sfapx"]
+[ext_resource type="Texture2D" uid="uid://bxn7m401kf6vd" path="res://assets/skip_button.png" id="18_ckc1d"]
+[ext_resource type="Script" path="res://ui/skip_level_button.gd" id="19_fevvj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f675v"]
 size = Vector2(62, 105)
 
-[node name="Level2" type="Node2D" node_paths=PackedStringArray("_spawner", "_spike_pits", "_reversos", "_gravity_switches")]
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("_spawner", "_level_skip_button", "_ladder", "_spike_pits", "_reversos", "_gravity_switches")]
 script = ExtResource("1_hgqjk")
 _spawner = NodePath("Marker2D")
+_level_skip_button = NodePath("Control/Button")
+_ladder = NodePath("Ladder")
 _spike_pits = [NodePath("SpikePit1")]
 _reversos = [NodePath("Reverso1"), NodePath("Reverso2")]
 _gravity_switches = [NodePath("GravitySwitches/GravitySwitch1"), NodePath("GravitySwitches/GravitySwitch2"), NodePath("GravitySwitches/GravitySwitch3"), NodePath("GravitySwitches/GravitySwitch4"), NodePath("GravitySwitches/GravitySwitch5"), NodePath("GravitySwitches/GravitySwitch6"), NodePath("GravitySwitches/GravitySwitch7"), NodePath("GravitySwitches/GravitySwitch8"), NodePath("GravitySwitches/GravitySwitch9"), NodePath("GravitySwitches/GravitySwitch10"), NodePath("GravitySwitches/GravitySwitch11"), NodePath("GravitySwitches/GravitySwitch12"), NodePath("GravitySwitches/GravitySwitch13"), NodePath("GravitySwitches/GravitySwitch14"), NodePath("GravitySwitches/GravitySwitch15"), NodePath("GravitySwitches/GravitySwitch16"), NodePath("GravitySwitches/GravitySwitch17"), NodePath("GravitySwitches/GravitySwitch18"), NodePath("GravitySwitches/GravitySwitch19"), NodePath("GravitySwitches/GravitySwitch20"), NodePath("GravitySwitches/GravitySwitch21"), NodePath("GravitySwitches/GravitySwitch22")]
@@ -586,7 +591,7 @@ position = Vector2(0, 20)
 [node name="Sprite2D" type="Sprite2D" parent="RandomBarrier"]
 texture_repeat = 2
 position = Vector2(1093, 432)
-texture = ExtResource("5_vdhci")
+texture = ExtResource("15_sfapx")
 region_enabled = true
 region_rect = Rect2(0, 0, 96, 8)
 
@@ -628,3 +633,19 @@ polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 position = Vector2(160, 984)
 script = ExtResource("14_a6b4l")
 _player_scene = ExtResource("15_rucy2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 1020.0
+offset_right = 440.0
+offset_bottom = 1172.0
+scale = Vector2(0.4, 0.4)
+icon = ExtResource("18_ckc1d")
+script = ExtResource("19_fevvj")

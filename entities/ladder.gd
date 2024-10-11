@@ -1,3 +1,4 @@
+class_name Ladder
 extends Area2D
 
 @export var _next_level: PackedScene
@@ -5,7 +6,11 @@ extends Area2D
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	
-	
-func _on_body_entered(_body: PhysicsBody2D) -> void:
+
+
+func trigger() -> void:
 	get_tree().change_scene_to_packed(_next_level)
+
+
+func _on_body_entered(_body: PhysicsBody2D) -> void:
+	trigger()

@@ -1,4 +1,4 @@
-class_name Player
+class_name Dragon
 extends CharacterBody2D
 
 @export var _speed: float = 30

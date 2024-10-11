@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://levels/level_controller.gd" id="1_20myk"]
 [ext_resource type="Texture2D" uid="uid://bl63uc3p48y0f" path="res://assets/winscreen.png" id="2_4u2ll"]
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="2_xgph2"]
-[ext_resource type="Script" path="res://entities/spawner.gd" id="10_jrrx1"]
-[ext_resource type="PackedScene" uid="uid://qo4nyl0xcy4o" path="res://entities/player/player.tscn" id="11_8ne4p"]
+[ext_resource type="Script" path="res://entities/dragon.gd" id="4_eapxy"]
+[ext_resource type="Texture2D" uid="uid://b80amwe80bty3" path="res://assets/pixel_dragon.png" id="4_gkej1"]
 
 [node name="Level2" type="Node2D" node_paths=PackedStringArray("_spawner")]
 script = ExtResource("1_20myk")
-_spawner = NodePath("Marker2D")
+_spawner = NodePath("")
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -70,7 +70,16 @@ region_rect = Rect2(0, 0, 64, 1080)
 scale = Vector2(1, 17)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(192, 984)
-script = ExtResource("10_jrrx1")
-_player_scene = ExtResource("11_8ne4p")
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_sprite")]
+position = Vector2(-648, 520)
+script = ExtResource("4_eapxy")
+_speed = 700.0
+_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(904, 404)
+texture = ExtResource("4_gkej1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+position = Vector2(904, 404)
+polygon = PackedVector2Array(64, 32, -64, 32, -64, -32, 64, -32)
