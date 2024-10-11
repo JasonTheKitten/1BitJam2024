@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv4gma2tkjvw6"]
+
+[ext_resource type="Script" path="res://levels/level_controller.gd" id="1_20myk"]
+[ext_resource type="Texture2D" uid="uid://bl63uc3p48y0f" path="res://assets/winscreen.png" id="2_4u2ll"]
+[ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="2_xgph2"]
+[ext_resource type="Script" path="res://entities/spawner.gd" id="10_jrrx1"]
+[ext_resource type="PackedScene" uid="uid://qo4nyl0xcy4o" path="res://entities/player/player.tscn" id="11_8ne4p"]
+
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("_spawner")]
+script = ExtResource("1_20myk")
+_spawner = NodePath("Marker2D")
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls"]
+position = Vector2(960, 540)
+texture = ExtResource("2_4u2ll")
+
+[node name="Ceiling" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(960, 32)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Ceiling"]
+rotation = 1.5708
+texture = ExtResource("2_xgph2")
+region_enabled = true
+region_rect = Rect2(0, -4, 64, 1664)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/Ceiling"]
+scale = Vector2(26, 1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="BottomFloor" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(960, 1048)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/BottomFloor"]
+rotation = 1.5708
+texture = ExtResource("2_xgph2")
+region_enabled = true
+region_rect = Rect2(0, -4, 64, 1792)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/BottomFloor"]
+scale = Vector2(28, 1)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(96, 540)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/LeftWall"]
+texture = ExtResource("2_xgph2")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 1080)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/LeftWall"]
+scale = Vector2(1, 17)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+texture_repeat = 2
+position = Vector2(1824, 540)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/RightWall"]
+texture = ExtResource("2_xgph2")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 1080)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/RightWall"]
+scale = Vector2(1, 17)
+polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(192, 984)
+script = ExtResource("10_jrrx1")
+_player_scene = ExtResource("11_8ne4p")

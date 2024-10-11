@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://dp5ygov7ovdlk"]
+[gd_scene load_steps=15 format=3 uid="uid://dp5ygov7ovdlk"]
 
 [ext_resource type="Script" path="res://levels/level_controller.gd" id="1_3turo"]
 [ext_resource type="Texture2D" uid="uid://gnnbl0qwgj04" path="res://assets/tower_outer_wall.png" id="2_20q5m"]
 [ext_resource type="Script" path="res://entities/ladder.gd" id="3_ukffs"]
+[ext_resource type="PackedScene" uid="uid://cv4gma2tkjvw6" path="res://levels/level_6.tscn" id="4_ljr74"]
 [ext_resource type="Texture2D" uid="uid://cp7lt5qxt6mid" path="res://assets/ladder.png" id="5_v8upi"]
 [ext_resource type="Script" path="res://entities/spike_pit.gd" id="6_n3we3"]
 [ext_resource type="Script" path="res://entities/reverso.gd" id="8_2q8e5"]
 [ext_resource type="Script" path="res://entities/gravity_switch.gd" id="10_mnvs8"]
+[ext_resource type="Texture2D" uid="uid://7ofskbnw8ux1" path="res://assets/go_up.png" id="11_rv7tp"]
 [ext_resource type="Texture2D" uid="uid://cn33jtj0noabp" path="res://assets/tower_inner_wall.png" id="12_n1b22"]
 [ext_resource type="Script" path="res://entities/platform.gd" id="13_xn576"]
 [ext_resource type="Script" path="res://entities/spawner.gd" id="15_soabi"]
@@ -82,6 +84,7 @@ polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("3_ukffs")
+_next_level = ExtResource("4_ljr74")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ladder"]
 position = Vector2(192, 160)
@@ -465,6 +468,10 @@ region_rect = Rect2(0, 0, 176, 32)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall2"]
 scale = Vector2(2.75, 0.5)
 polygon = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("11_rv7tp")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(192, 984)
